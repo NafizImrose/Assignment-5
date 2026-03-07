@@ -19,6 +19,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- css -->
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="bg-[#F8FAFC]">
     <nav>
@@ -51,9 +53,27 @@
     </nav>
 
     <section class="w-9/12 bg-white mx-auto shadow-md mt-16 p-6 flex gap-3">
-      <button class="btn w-30 btn-primary btn-soft">All</button>
-      <button class="btn w-30 btn-primary btn-soft">Open</button>
-      <button class="btn w-30 btn-primary btn-soft">Close</button>
+      <button
+        id="all-btn"
+        onclick="tabBtn('all', 'all-btn')"
+        class="btn w-30 btn-primary btn-soft"
+      >
+        All
+      </button>
+      <button
+        id="open-btn"
+        onclick="tabBtn('open', 'open-btn')"
+        class="btn w-30 btn-primary btn-soft"
+      >
+        Open
+      </button>
+      <button
+        id="close-btn"
+        onclick="tabBtn('close', 'close-btn')"
+        class="btn w-30 btn-primary btn-soft"
+      >
+        Close
+      </button>
     </section>
 
     <section
