@@ -50,14 +50,14 @@
       </div>
     </nav>
 
-    <section class="w-8/12 bg-white mx-auto shadow-md mt-16 p-6 flex gap-3">
+    <section class="w-9/12 bg-white mx-auto shadow-md mt-16 p-6 flex gap-3">
       <button class="btn w-30 btn-primary btn-soft">All</button>
       <button class="btn w-30 btn-primary btn-soft">Open</button>
       <button class="btn w-30 btn-primary btn-soft">Close</button>
     </section>
 
     <section
-      class="w-8/12 bg-white mx-auto shadow-md mt-3 p-5 flex justify-between"
+      class="w-9/12 bg-white mx-auto shadow-md mt-3 p-5 flex justify-between"
     >
       <div class="flex gap-3 justify-start items-cente">
         <div
@@ -82,9 +82,43 @@
       </div>
     </section>
 
-    <section
-      class="cards w-8/12 mx-auto shadow-md p-6 mt-1 bg-[#F8FAFC]"
-    ></section>
+    <section class="cards w-9/12 mx-auto shadow-md p-6 mt-1 bg-[#F8FAFC]">
+      <div id="all" class="grid grid-cols-4">
+        <div class="card">
+          <div class="p-6 bg-white shadow-md border-t-5 border-[#00A96E]">
+            <div class="flex justify-between">
+              <div><img src="assets/Open-Status.png" alt="" /></div>
+              <div class="px-5 py-1 bg-[#FEECEC] rounded-full">
+                <h1 class="text-red-500 text-sm">HIGH</h1>
+              </div>
+            </div>
+            <h1 class="font-bold mt-3 mb-2 text-sm">
+              Fix navigation menu on mobile devices
+            </h1>
+            <p class="text-sm pb-3 text-[#64748B]">
+              The navigation menu doesn't collapse properly on mobile devices...
+            </p>
+
+            <div class="mother-bug flex gap-2">
+              <div
+                class="px-2 py-1 bg-[#FEECEC] border border-red-600 rounded-full"
+              >
+                <h1 class="text-red-500 text-sm">
+                  <i class="fa-solid fa-bug"></i> BUG
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div class="w-full border-t border-gray-200"></div>
+          <div class="time py-4 px-6 bg-white shadow-md">
+            <p class="text-[#64748B]">#1 by john_doe</p>
+            <p class="text-[#64748B]">1/15/2024</p>
+          </div>
+        </div>
+      </div>
+      <div id="open"></div>
+      <div id="close"></div>
+    </section>
     <script src="home.js"></script>
   </body>
 </html>
