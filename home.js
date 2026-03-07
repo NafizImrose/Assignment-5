@@ -20,6 +20,28 @@ const tabBtn = (id, btn) => {
 
   const activeBtn = document.getElementById(btn);
   activeBtn.classList.add("active");
+  //   issues count show
+  showNoOfIssues(btn);
+};
+
+const showNoOfIssues = (btn_id) => {
+  const allcount = document.getElementById("all-count");
+  const opencount = document.getElementById("open-count");
+  const closecount = document.getElementById("close-count");
+
+  allcount.classList.add("hidden");
+  opencount.classList.add("hidden");
+  closecount.classList.add("hidden");
+
+  if (btn_id === "all-btn") {
+    allcount.classList.remove("hidden");
+  } else if (btn_id === "open-btn") {
+    opencount.classList.remove("hidden");
+    document.getElementById("open-count").innerText = openCnt;
+  } else if (btn_id === "close-btn") {
+    opencount.classList.remove("hidden");
+    document.getElementById("open-count").innerText = closeCnt;
+  }
 };
 
 const rawIssues = () => {
@@ -28,9 +50,12 @@ const rawIssues = () => {
     .then((allData) => allissues(allData.data));
 };
 
+let openCnt = 0;
+let closeCnt = 0;
 const allissues = (issues) => {
   issues.forEach((issue) => {
     if (issue.status === "open") {
+      openCnt++;
       const newDiv = document.createElement("div");
       newDiv.innerHTML = `
         <div
@@ -72,6 +97,7 @@ const allissues = (issues) => {
       const clone = newDiv.cloneNode(true);
       openSec.append(clone);
     } else if (issue.status === "closed") {
+      closeCnt++;
       const newDiv2 = document.createElement("div");
       newDiv2.innerHTML = `
         <div
