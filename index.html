@@ -34,13 +34,23 @@
       <div class="form w-10/12 mx-auto pb-6">
         <fieldset class="fieldset">
           <label class="label font-bold text-black">Username</label>
-          <input type="email" class="input w-full" placeholder="Email" />
+          <input
+            id="username"
+            type="text"
+            class="input w-full"
+            placeholder="Enter Username"
+          />
           <p class="text-[#4A00FF]">Default: admin</p>
           <label class="label font-bold text-black">Password</label>
-          <input type="password" class="input w-full" placeholder="Password" />
+          <input
+            id="password"
+            type="password"
+            class="input w-full"
+            placeholder="Enter Password"
+          />
           <p class="text-[#4A00FF]">Default: admin123</p>
 
-          <button class="btn btn-primary mt-4">Login</button>
+          <button id="sign-in-btn" class="btn btn-primary mt-4">Sign In</button>
         </fieldset>
       </div>
 
@@ -58,5 +68,6 @@
         </div>
       </div>
     </section>
+    <script src="sign_in.js"></script>
   </body>
 </html>
