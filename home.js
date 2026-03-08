@@ -1,3 +1,6 @@
+const all = document.getElementById("all-btn");
+all.classList.add("active");
+
 const tabBtn = (id, btn) => {
   const all = document.getElementById("all");
   const open = document.getElementById("open");
@@ -63,15 +66,15 @@ const allissues = (issues) => {
         >
           <div class="flex justify-between">
             <div><img src="assets/Open-Status.png" alt="" /></div>
-            <div class="px-5 py-1 bg-[#FEECEC] rounded-full">
-              <h1 class="text-red-500 text-sm">HIGH</h1>
+            <div id="badge_${issue.id}" class="px-5 py-1  rounded-full">
+              <h1 id="badge-text-${issue.id}" class=" text-sm">${issue.priority}</h1>
             </div>
           </div>
           <h1 class="font-bold mt-3 mb-2 text-sm">
-            Fix navigation menu on mobile devices
+            ${issue.title}
           </h1>
           <p class="text-sm pb-3 text-[#64748B]">
-            The navigation menu doesn't collapse properly on mobile devices...
+            ${issue.description}
           </p>
 
           <div class="mother-bug flex gap-2 mb-4">
@@ -90,9 +93,25 @@ const allissues = (issues) => {
           </div>
         </div>
         `;
+
       const allSec = document.getElementById("all");
       const openSec = document.getElementById("open");
       allSec.append(newDiv);
+
+      // badge background color setting
+      const badge = document.getElementById(`badge_${issue.id}`);
+      const badgeText = document.getElementById(`badge-text-${issue.id}`);
+      if (issue.priority === "high") {
+        badge.classList.add("bg-[#FEECEC]");
+        badgeText.classList.add("text-[#EF4444]");
+      } else if (issue.priority === "medium") {
+        badge.classList.add("bg-[#FFF6D1]");
+        badgeText.classList.add("text-[#F59E0B]");
+      } else if (issue.priority === "low") {
+        badge.classList.add("bg-[#EEEFF2]");
+        badgeText.classList.add("text-[#9CA3AF]");
+      }
+      //   ***********************************
 
       const clone = newDiv.cloneNode(true);
       openSec.append(clone);
