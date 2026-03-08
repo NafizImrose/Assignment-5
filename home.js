@@ -75,14 +75,8 @@ const allissues = (issues) => {
             ${issue.description}
           </p>
 
-          <div class="mother-bug flex gap-2 mb-4">
-            <div
-              class="px-2 py-1 bg-[#FEECEC] border border-red-600 rounded-full"
-            >
-              <h1 class="text-red-500 text-sm">
-                <i class="fa-solid fa-bug"></i> BUG
-              </h1>
-            </div>
+          <div id="labels" class="mother-bug flex gap-2 mb-4">
+            
           </div>
           <div class="-mx-6 border-t border-gray-300"></div>
           <div class="time py-3">
@@ -95,6 +89,24 @@ const allissues = (issues) => {
     const allSec = document.getElementById("all");
 
     allSec.append(newDiv);
+    // adding labels
+    const labels = issue.labels;
+    labels.forEach((label) => {
+      const labelDiv = document.createElement("div");
+      if (label === "bug") {
+        labelDiv.innerHTML = `
+            <div
+              class="px-2 py-1 bg-[#FEECEC] border border-red-600 rounded-full"
+            >
+              <h1 class="text-red-500 text-sm">
+                <i class="fa-solid fa-bug"></i> ${label}
+              </h1>
+            </div>
+            `;
+      }
+      const motherLabel = document.getElementById("labels");
+      motherLabel.append(labelDiv);
+    });
 
     // badge background color setting
     const badge = document.getElementById(`badge_${issue.id}`);
