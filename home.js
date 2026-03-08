@@ -75,7 +75,7 @@ const allissues = (issues) => {
             ${issue.description}
           </p>
 
-          <div id="labels" class="mother-bug flex gap-2 mb-4">
+          <div id="labels-${issue.id}" class="mother-bug flex gap-2 mb-4">
             
           </div>
           <div class="-mx-6 border-t border-gray-300"></div>
@@ -103,8 +103,48 @@ const allissues = (issues) => {
               </h1>
             </div>
             `;
+      } else if (label === "help wanted") {
+        labelDiv.innerHTML = `
+            <div
+              class="px-2 py-1 bg-[#fff5cc] border border-[#D97706] rounded-full"
+            >
+              <h1 class="text-[#D97706] text-sm">
+                <i class="fa-solid fa-life-ring"></i> ${label}
+              </h1>
+            </div>
+            `;
+      } else if (label === "enhancement") {
+        labelDiv.innerHTML = `
+            <div
+              class="px-2 py-1 bg-[#DEFCE8] border border-[#00A96E] rounded-full"
+            >
+              <h1 class="text-[#00A96E] text-sm">
+                <i class="fa-solid fa-star-half-stroke"></i> ${label}
+              </h1>
+            </div>
+            `;
+      } else if (label === "good first issue") {
+        labelDiv.innerHTML = `
+            <div
+              class="px-2 py-1 bg-[#d6f8ff] border border-[#0e92fd] rounded-full"
+            >
+              <h1 class="text-[#0e92fd] text-[13px]">
+                <i class="fa-solid fa-thumbs-up"></i> ${label}
+              </h1>
+            </div>
+            `;
+      } else if (label === "documentation") {
+        labelDiv.innerHTML = `
+            <div
+              class="px-2 py-1 bg-[#ffe7ff] border border-[#ff16f7] rounded-full"
+            >
+              <h1 class="text-[#ff14f7] text-[13px]">
+                <i class="fa-solid fa-file-lines"></i> ${label}
+              </h1>
+            </div>
+            `;
       }
-      const motherLabel = document.getElementById("labels");
+      const motherLabel = document.getElementById(`labels-${issue.id}`);
       motherLabel.append(labelDiv);
     });
 
