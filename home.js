@@ -82,8 +82,14 @@ const allissues = (issues) => {
           </div>
           <div class="-mx-6 border-t border-gray-300"></div>
           <div class="time py-3">
-            <p class="text-[#64748B]">#1 by john_doe</p>
-            <p class="text-[#64748B]">1/15/2024</p>
+            <div class="flex justify-between">
+          <p class="text-[#64748B] text-[12px]">#1 by ${issue.author ? issue.author : "N/A"}</p>
+          <p class="text-[#64748B] text-[12px]">${new Date(issue.createdAt).toLocaleDateString()}</p>
+        </div>
+        <div class="flex justify-between">
+          <p class="text-[#64748B] text-[12px]">Assignee: ${issue.assignee ? issue.assignee : "N/A"}</</p>
+          <p class="text-[#64748B] text-[12px]">Updated: ${new Date(issue.updatedAt).toLocaleDateString()}</p>
+        </div>
           </div>
         </div>
         `;
