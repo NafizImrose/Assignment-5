@@ -38,6 +38,7 @@ const showNoOfIssues = (btn_id) => {
 
   if (btn_id === "all-btn") {
     allcount.classList.remove("hidden");
+    document.getElementById("all-count").innerText = allCnt;
   } else if (btn_id === "open-btn") {
     opencount.classList.remove("hidden");
     document.getElementById("open-count").innerText = openCnt;
@@ -52,11 +53,12 @@ const rawIssues = () => {
     .then((res) => res.json())
     .then((allData) => allissues(allData.data));
 };
-
+let allCnt = 0;
 let openCnt = 0;
 let closeCnt = 0;
 const allissues = (issues) => {
   issues.forEach((issue) => {
+    allCnt++;
     const newDiv = document.createElement("div");
     newDiv.innerHTML = `
         <div id="card-${issue.id}"
