@@ -33,10 +33,12 @@ const showNoOfIssues = (btn_id) => {
   const allcount = document.getElementById("all-count");
   const opencount = document.getElementById("open-count");
   const closecount = document.getElementById("close-count");
+  const searchcount = document.getElementById("search-count");
 
   allcount.classList.add("hidden");
   opencount.classList.add("hidden");
   closecount.classList.add("hidden");
+  searchcount.classList.add("hidden");
 
   if (btn_id === "all-btn") {
     allcount.classList.remove("hidden");
@@ -45,8 +47,8 @@ const showNoOfIssues = (btn_id) => {
     opencount.classList.remove("hidden");
     document.getElementById("open-count").innerText = openCnt;
   } else if (btn_id === "close-btn") {
-    opencount.classList.remove("hidden");
-    document.getElementById("open-count").innerText = closeCnt;
+    closecount.classList.remove("hidden");
+    document.getElementById("close-count").innerText = closeCnt;
   }
 };
 
@@ -278,6 +280,26 @@ document.getElementById("search-btn").addEventListener("click", function () {
   close.classList.add("hidden");
   search.classList.remove("hidden");
 
+  //   search count
+  const allcount = document.getElementById("all-count");
+  const opencount = document.getElementById("open-count");
+  const closecount = document.getElementById("close-count");
+  const searchcount = document.getElementById("search-count");
+
+  allcount.classList.add("hidden");
+  opencount.classList.add("hidden");
+  closecount.classList.add("hidden");
+  searchcount.classList.remove("hidden");
+
+  //   make all button inactive
+  const allBtn = document.getElementById("all-btn");
+  const openBtn = document.getElementById("open-btn");
+  const closeBtn = document.getElementById("close-btn");
+
+  allBtn.classList.remove("active");
+  openBtn.classList.remove("active");
+  closeBtn.classList.remove("active");
+
   const inputText = document.getElementById("search-text").value.trim();
   fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${inputText}`,
@@ -287,6 +309,8 @@ document.getElementById("search-btn").addEventListener("click", function () {
 
   const searchSec = document.getElementById("search");
   const searchData = (issues) => {
+    searchCnt = issues.length;
+    document.getElementById("search-count").innerText = searchCnt;
     if (issues.length == 0) {
       const empty = document.createElement("div");
       empty.innerHTML = `
@@ -295,11 +319,10 @@ document.getElementById("search-btn").addEventListener("click", function () {
       </div>
       `;
       searchSec.append(empty);
+      //   document.getElementById("search-count").innerText = 0;
       return;
     }
     issues.forEach((issue) => {
-      searchCnt++;
-
       const newDiv = document.createElement("div");
       newDiv.innerHTML = `
         <div id="search-card-${issue.id}" onclick="modal_${issue.id}.showModal()"
