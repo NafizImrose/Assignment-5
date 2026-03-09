@@ -61,7 +61,7 @@ const allissues = (issues) => {
     allCnt++;
     const newDiv = document.createElement("div");
     newDiv.innerHTML = `
-        <div id="card-${issue.id}" onclick="my_modal_5.showModal()"
+        <div id="card-${issue.id}" onclick="my_modal_${issue.id}.showModal()"
           class="card p-6 bg-white shadow-md border-t-5  rounded-md"
         >
           <div class="flex justify-between">
@@ -93,7 +93,56 @@ const allissues = (issues) => {
           </div>
         </div>
         `;
+    // Modal section
+    const modalDiv = document.createElement("div");
+    modalDiv.innerHTML = `
+         <!-- Open the modal using ID.showModal() method -->
 
+      <dialog id="my_modal_${issue.id}" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold mb-2">${issue.title}</h3>
+          <div class="m-div text-sm flex gap-2 justify-start items-center">
+            <div class="px-2 py-1 bg-[#00A96E] rounded-full">
+              <h1 class="text-white">Opened</h1>
+            </div>
+            <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
+            <p class="text-[#64748B]">Opened by ${issue.assignee ? issue.assignee : "N/A"}</p>
+            <div class="w-1 h-1 rounded-full bg-[#64748B]"></div>
+            <p class="text-[#64748B]">${new Date(issue.createdAt).toLocaleDateString()}</p>
+          </div>
+          <!-- badges -->
+          <div
+            id="modal-labels-${issue.id}"
+            class="mother-bug flex gap-2 my-6"
+          ></div>
+          <p class="text-[#64748B] mb-6">
+            ${issue.description}
+          </p>
+          <div class="flex justify-between items-center p-4 rounded-md bg-[#F8FAFC]">
+            <div class="">
+              <p class="text-[#64748B]">Assignee:</p>
+              <h1 class="font-bold">${issue.assignee ? issue.assignee : "N/A"}</h1>
+            </div>
+            <div class="flex flex-col items-center ">
+              <p class="text-[#64748B]">Priority:</p>
+              <div id="modal-badge_${issue.id}" class="px-5 py-1  rounded-full">
+              <h1 id="modal-badge-text-${issue.id}" class="font-bold ">${issue.priority}</h1>
+              </div>
+            </div>
+          </div>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn btn-primary">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+        `;
+    const modalSec = document.getElementById("modal-sec");
+    modalSec.append(modalDiv);
+
+    // modal ends
     const allSec = document.getElementById("all");
 
     allSec.append(newDiv);
@@ -154,20 +203,33 @@ const allissues = (issues) => {
       }
       const motherLabel = document.getElementById(`labels-${issue.id}`);
       motherLabel.append(labelDiv);
+      const cloneLabel = labelDiv.cloneNode(true); // appended labels to modal text
+      const modalLabels = document.getElementById(`modal-labels-${issue.id}`);
+      modalLabels.append(cloneLabel);
     });
 
     // badge background color setting
     const badge = document.getElementById(`badge_${issue.id}`);
     const badgeText = document.getElementById(`badge-text-${issue.id}`);
+    const modalBadge = document.getElementById(`modal-badge_${issue.id}`);
+    const modalBadgeText = document.getElementById(
+      `modal-badge-text-${issue.id}`,
+    );
     if (issue.priority === "high") {
       badge.classList.add("bg-[#FEECEC]");
+      modalBadge.classList.add("bg-[#EF4444]");
       badgeText.classList.add("text-[#EF4444]");
+      modalBadgeText.classList.add("text-white");
     } else if (issue.priority === "medium") {
       badge.classList.add("bg-[#FFF6D1]");
+      modalBadge.classList.add("bg-[#00A96E]");
       badgeText.classList.add("text-[#F59E0B]");
+      modalBadgeText.classList.add("text-white");
     } else if (issue.priority === "low") {
       badge.classList.add("bg-[#EEEFF2]");
+      modalBadge.classList.add("bg-[#f5c951]");
       badgeText.classList.add("text-[#9CA3AF]");
+      modalBadgeText.classList.add("text-white");
     }
     //   card border and logo
     const borderColor = document.getElementById(`card-${issue.id}`);
@@ -195,7 +257,6 @@ const allissues = (issues) => {
       const clone = newDiv.cloneNode(true);
       closeSec.append(clone);
     }
-    // Modal section
   });
 };
 
