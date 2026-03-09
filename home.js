@@ -61,7 +61,7 @@ const allissues = (issues) => {
     allCnt++;
     const newDiv = document.createElement("div");
     newDiv.innerHTML = `
-        <div id="card-${issue.id}"
+        <div id="card-${issue.id}" onclick="my_modal_5.showModal()"
           class="card p-6 bg-white shadow-md border-t-5  rounded-md"
         >
           <div class="flex justify-between">
@@ -83,7 +83,7 @@ const allissues = (issues) => {
           <div class="-mx-6 border-t border-gray-300"></div>
           <div class="time py-3">
             <div class="flex justify-between">
-          <p class="text-[#64748B] text-[12px]">#1 by ${issue.author ? issue.author : "N/A"}</p>
+          <p class="text-[#64748B] text-[12px]">#${issue.id} by ${issue.author ? issue.author : "N/A"}</p>
           <p class="text-[#64748B] text-[12px]">${new Date(issue.createdAt).toLocaleDateString()}</p>
         </div>
         <div class="flex justify-between">
@@ -195,6 +195,7 @@ const allissues = (issues) => {
       const clone = newDiv.cloneNode(true);
       closeSec.append(clone);
     }
+    // Modal section
   });
 };
 
