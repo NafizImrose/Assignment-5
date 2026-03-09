@@ -21,6 +21,8 @@
     />
     <!-- css -->
     <link rel="stylesheet" href="style.css" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="assets/Aperture.png" type="image/x-icon" />
   </head>
   <body class="bg-[#F8FAFC]">
     <nav>
@@ -115,6 +117,14 @@
     </section>
 
     <section
+      id="loading-spinner"
+      class="spinner p-20 flex justify-center items-center hidden"
+    >
+      <span class="loading loading-spinner loading-xl"></span>
+    </section>
+
+    <section
+      id="container"
       class="cards w-11/12 md:w-9/12 mx-auto shadow-md p-6 mt-1 bg-[#F8FAFC]"
     >
       <div

@@ -52,7 +52,18 @@ const showNoOfIssues = (btn_id) => {
   }
 };
 
+const manageSpinner = (status) => {
+  if (status == true) {
+    document.getElementById("loading-spinner").classList.remove("hidden");
+    document.getElementById("container").classList.add("hidden");
+  } else {
+    document.getElementById("loading-spinner").classList.add("hidden");
+    document.getElementById("container").classList.remove("hidden");
+  }
+};
+
 const rawIssues = () => {
+  manageSpinner(true);
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res) => res.json())
     .then((allData) => allissues(allData.data));
@@ -91,7 +102,7 @@ const allissues = (issues) => {
           <p class="text-[#64748B] text-[12px]">${new Date(issue.createdAt).toLocaleDateString()}</p>
         </div>
         <div class="flex justify-between">
-          <p class="text-[#64748B] text-[12px]">Assignee: ${issue.assignee ? issue.assignee : "N/A"}</</p>
+          <p class="text-[#64748B] text-[12px]">Assignee: ${issue.assignee ? issue.assignee : "N/A"}</p>
           <p class="text-[#64748B] text-[12px]">Updated: ${new Date(issue.updatedAt).toLocaleDateString()}</p>
         </div>
           </div>
@@ -262,6 +273,7 @@ const allissues = (issues) => {
       closeSec.append(clone);
     }
   });
+  manageSpinner(false);
 };
 
 rawIssues();
@@ -269,6 +281,7 @@ rawIssues();
 //  search
 let searchCnt = 0;
 document.getElementById("search-btn").addEventListener("click", function () {
+  manageSpinner(true);
   const all = document.getElementById("all");
   const open = document.getElementById("open");
   const close = document.getElementById("close");
@@ -319,7 +332,7 @@ document.getElementById("search-btn").addEventListener("click", function () {
       </div>
       `;
       searchSec.append(empty);
-      //   document.getElementById("search-count").innerText = 0;
+      manageSpinner(false);
       return;
     }
     issues.forEach((issue) => {
@@ -522,5 +535,6 @@ document.getElementById("search-btn").addEventListener("click", function () {
         borderColor.classList.add("border-[#A855F7]");
       }
     });
+    manageSpinner(false);
   };
 });
